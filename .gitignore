@@ -1,0 +1,7 @@
+# Ignore the config folder
+config/
+# Ignore node_modules in root and client directories
+node_modules/
+client/node_modules/
+# Ignore Private folder in root
+Private/

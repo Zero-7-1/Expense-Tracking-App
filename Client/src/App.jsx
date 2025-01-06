@@ -11,7 +11,7 @@ import './App.css';
 
 // Blank Page Component
 function BlankPage() {
-  return <h1>This is a blank page!</h1>;
+  return <h1>This Would be Login/Register with Authentication</h1>;
 }
 
 // Main FMA Dashboard Components

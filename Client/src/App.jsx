@@ -9,12 +9,12 @@ import { AddTransaction } from './components/AddTransaction';
 import { GlobalProvider } from './context/GlobalState';
 import './App.css';
 
-// Blank Page Component
+// Blank Page Component which would be LoginReg component (would separate from app)
 function BlankPage() {
   return <h1>This Would be Login/Register with Authentication</h1>;
 }
 
-// Main FMA Dashboard Components
+// Main FMA Dashboard Components (would separate from app)
 function Dashboard() {
   return (
     <GlobalProvider>
@@ -29,7 +29,7 @@ function Dashboard() {
   );
 }
 
-// App Component
+// main  App Component
 function App() {
   return (
     <Router>

@@ -9,10 +9,10 @@ import { AddTransaction } from './components/AddTransaction';
 import { GlobalProvider } from './context/GlobalState';
 import './App.css';
 
-// Blank Page Component which would be LoginReg component (would separate from app)
-function BlankPage() {
-  return <h1>This Would be Login/Register with Authentication</h1>;
-}
+import LogReg from './components/LogReg/LogReg';
+import { AuthProvider } from './context/authContext';
+
+
 
 // Main FMA Dashboard Components (would separate from app)
 function Dashboard() {
@@ -32,18 +32,17 @@ function Dashboard() {
 // main  App Component
 function App() {
   return (
+    <AuthProvider> 
     <Router>
       <Routes>
-        {/* Blank Page for '/' */}
-        <Route path="/" element={<BlankPage />} />
-
-        {/* Dashboard Page for '/dashboard' */}
+       
+        <Route path="/" element={<LogReg />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
         {/* Redirect any other routes to the blank page */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
+    </AuthProvider>
   );
 }
 

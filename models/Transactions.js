@@ -14,6 +14,10 @@ const TransactionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
 });
 
-export default mongoose.model('Transaction', TransactionSchema); 
+export default mongoose.model('Transaction', TransactionSchema);

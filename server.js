@@ -8,14 +8,12 @@ import cors from 'cors'; // cors middleware
 import transactions from './routes/transactions.js';
 
 import connectDB from './config/db.js'; // Import the connectDB function
-connectDB(); // Call the function to connect to the database
 
 dotenv.config({ path: './config/config.env' });
 
-const app = express();
+connectDB(); // Call the function to connect to the database
 
-// Enable CORS for all origins (Not recommended for production - see below)
-// app.use(cors());
+const app = express();
 
 // More restrictive CORS configuration (Recommended for production)
 app.use(cors({
@@ -29,16 +27,9 @@ app.use(express.json()); // This allows us to accept JSON data in the body
 // morgan 
 app.use(morgan('dev')); // This logs the HTTP requests to the console
 
-if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('dev'));
-}
-
-
 app.use('/api/v1/transactions', transactions);
 /* whenever we make request to this address it would route to the transactions file 
 get method */ 
-
-
 
 const PORT = process.env.PORT || 5001;
 

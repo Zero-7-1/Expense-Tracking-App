@@ -1,6 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react'; 
 import AppReducer from './AppReducer';
 import axios from 'axios';
+import { useAuth } from './authContext';
 
 // Initial state
 const initialState = {
@@ -15,20 +16,37 @@ export const GlobalContext = createContext(initialState);
 // Provider component
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
+  const { currentUser } = useAuth();
+
+  const getAuthToken = async () => {
+    if (currentUser) {
+      return await currentUser.getIdToken();
+    }
+    return null;
+  };
 
   // Actions
   async function getTransactions() {
     try {
-      const res = await axios.get('http://localhost:5001/api/v1/transactions');
-
-      dispatch({
-        type: 'GET_TRANSACTIONS',
-        payload: res.data.data, // Update state with fetched transactions
+      const token = await getAuthToken();
+      const res = await axios.get('http://localhost:5001/api/v1/transactions', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
+
+      if (res.data) {
+        dispatch({
+          type: 'GET_TRANSACTIONS',
+          payload: res.data.data, // Update state with fetched transactions
+        });
+      } else {
+        throw new Error('No data received');
+      }
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: err.response.data.error,
+        payload: err.message,
       });
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false }); // Set loading to false after request
@@ -37,7 +55,12 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteTransaction(id) {
     try {
-      await axios.delete(`http://localhost:5001/api/v1/transactions/${id}`);
+      const token = await getAuthToken();
+      await axios.delete(`http://localhost:5001/api/v1/transactions/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       dispatch({
         type: 'DELETE_TRANSACTION',
@@ -46,7 +69,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: err.response.data.error,
+        payload: err.message,
       });
     }
   }
@@ -55,28 +78,35 @@ export const GlobalProvider = ({ children }) => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${await getAuthToken()}`,
       },
     };
 
     try {
       const res = await axios.post('http://localhost:5001/api/v1/transactions', transaction, config);
 
-      dispatch({
-        type: 'ADD_TRANSACTION',
-        payload: res.data.data,
-      });
+      if (res.data) {
+        dispatch({
+          type: 'ADD_TRANSACTION',
+          payload: res.data.data,
+        });
+      } else {
+        throw new Error('No data received');
+      }
     } catch (err) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: err.response.data.error,
+        payload: err.message,
       });
     }
   }
 
   // Call getTransactions on component mount (optional)
   useEffect(() => {
-    getTransactions();
-  }, []); // Empty dependency array ensures it runs only once
+    if (currentUser) {
+      getTransactions();
+    }
+  }, [currentUser]); // Empty dependency array ensures it runs only once
 
   return (
     <GlobalContext.Provider value={{

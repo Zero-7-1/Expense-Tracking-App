@@ -10,7 +10,8 @@ import { GlobalProvider } from './context/GlobalState';
 import './App.css';
 
 import LogReg from './components/LogReg/LogReg';
-import { AuthProvider } from './context/authContext';
+import { AuthProvider, useAuth } from './context/authContext';
+import Nav from './components/Nav';
 
 
 
@@ -18,6 +19,7 @@ import { AuthProvider } from './context/authContext';
 function Dashboard() {
   return (
     <GlobalProvider>
+      <Nav />
       <Header />
       <div className="container">
         <Balance />
@@ -29,6 +31,11 @@ function Dashboard() {
   );
 }
 
+function PrivateRoute({ children }) {
+  const { currentUser } = useAuth();
+  return currentUser ? children : <Navigate to="/" />;
+}
+
 // main  App Component
 function App() {
   return (
@@ -37,7 +44,7 @@ function App() {
       <Routes>
        
         <Route path="/" element={<LogReg />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         {/* Redirect any other routes to the blank page */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

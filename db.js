@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
   
-// Load env variables
-dotenv.config({ path: './config/config.env' });
+// Load env variables from the root .env file
+dotenv.config(); // No need to specify the path if it's in the root
 
 const uri = process.env.MONGO_URI;
 

@@ -5,10 +5,9 @@ import morgan from 'morgan';
 import cors from 'cors'; // cors middleware
 
 import transactions from './routes/transactions.js';
-
 import connectDB from './db.js'; // Import the connectDB function
 
-dotenv.config({ path: './config/config.env' });
+dotenv.config();  // Load environment variables from the .env file
 
 connectDB(); // Call the function to connect to the database
 

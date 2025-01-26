@@ -15,9 +15,16 @@ const app = express();
 
 // More restrictive CORS configuration (Recommended for production)
 app.use(cors({
-    origin: 'http://localhost:5173', // Only allow requests from your client's origin
+    origin: 'https://fma-web-app-frontend.vercel.app', // Only allow requests from your client's origin http://localhost:5173
     credentials: true, // If you need to send cookies or authorization headers
   }));
+
+  app.use((req, res, next) => {
+    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+    next();
+  });
+  
 
 app.use(express.json()); // This allows us to accept JSON data in the body
 // this needs to be in top route url 

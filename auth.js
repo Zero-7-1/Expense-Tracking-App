@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'; 
 dotenv.config();  
-
+ 
 import admin from 'firebase-admin';
 
 // Now you can safely access your environment variables

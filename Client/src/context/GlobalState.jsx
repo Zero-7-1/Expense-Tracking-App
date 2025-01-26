@@ -29,7 +29,7 @@ export const GlobalProvider = ({ children }) => {
   async function getTransactions() {
     try {
       const token = await getAuthToken();
-      const res = await axios.get('http://localhost:5001/api/v1/transactions', {
+      const res = await axios.get('https://financial-management-app-backend.onrender.com/api/v1/transactions', {     // http://localhost:5001/api/v1/transactions
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -56,7 +56,7 @@ export const GlobalProvider = ({ children }) => {
   async function deleteTransaction(id) {
     try {
       const token = await getAuthToken();
-      await axios.delete(`http://localhost:5001/api/v1/transactions/${id}`, {
+      await axios.delete(`https://financial-management-app-backend.onrender.com/api/v1/transactions/${id}`, {    // http://localhost:5001/api/v1/transactions/${id}
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -83,7 +83,7 @@ export const GlobalProvider = ({ children }) => {
     };
 
     try {
-      const res = await axios.post('http://localhost:5001/api/v1/transactions', transaction, config);
+      const res = await axios.post('https://financial-management-app-backend.onrender.com/api/v1/transactions', transaction, config);   // http://localhost:5001/api/v1/transactions
 
       if (res.data) {
         dispatch({

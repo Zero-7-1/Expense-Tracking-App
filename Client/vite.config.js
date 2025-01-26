@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5001', // Your backend server
+        target: 'https://financial-management-app-backend.onrender.com', // Your backend server OR  http://localhost:5001
         changeOrigin: true, // Crucial for CORS
       },
     },

@@ -25,6 +25,10 @@ app.use(express.json()); // This allows us to accept JSON data in the body
 // morgan 
 app.use(morgan('dev')); // This logs the HTTP requests to the console
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the FMA API!, Build with love and passion by Sudhanshu');
+});
+
 app.use('/api/v1/transactions', transactions);
 /* whenever we make request to this address it would route to the transactions file 
 get method */ 

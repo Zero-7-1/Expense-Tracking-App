@@ -1,6 +1,6 @@
 import express from 'express';
 import { getTransactions, addTransaction, deleteTransaction } from '../controllers/transactions.js';
-import { verifyToken } from '../middleware/auth.js';
+import { verifyToken } from '../auth.js';
 
 const router = express.Router();
 

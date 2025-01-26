@@ -5,3 +5,4 @@ node_modules/
 client/node_modules/
 # Ignore Private folder in root
 Private/
+.env

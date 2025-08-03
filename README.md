@@ -1,7 +1,4 @@
-
-<h2> While Testing the Project: </h2>
-
-This project is a simple hobby project created as part of my learning journey to enhance 
+This project is a simple hobby and portfolio project created as part of my learning journey to enhance 
 my skills in web development. The deployment leverages free trials and services offered 
 by various platforms.
 
@@ -21,3 +18,4 @@ I appreciate your understanding and hope you enjoy exploring the project!
 
 <h2> References: </h2>
 [Connecting to MongoDB Atlas] (https://www.mongodb.com/docs/atlas/getting-started/)
+

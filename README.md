@@ -14,8 +14,9 @@ This application uses Firebase Authentication to securely manage all login crede
 Please note that since this is a learning project and not a professional app, login 
 credentials and any data entered into the app will be periodically removed.
 
-I appreciate your understanding and hope you enjoy exploring the project!
+Hope you enjoy exploring the project!
 
 <h2> References: </h2>
 [Connecting to MongoDB Atlas] (https://www.mongodb.com/docs/atlas/getting-started/)
+
 
